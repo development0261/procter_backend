@@ -13,13 +13,9 @@ def student_details(request,enrollment_no,passwd):
         return HttpResponse("Hello")
 
 def exam_details(request,subject_id,student_id):
-    
-    print("subject_id : ",subject_id)
-    
-    subject=Subject_details.objects.filter(subject=subject_id).first()
-   
+        
+    subject=Subject_details.objects.filter(subject=subject_id).first()   
     data=Exam_details.objects.all().filter(isactive="True",subject_id=subject,student_id=student_id)
-    # print("-*****************--------",data)
     res={}
     for i in data:
         print(i.student_id)
@@ -39,18 +35,20 @@ def subject_details(request):
     return JsonResponse(res)
     
 def get_exam_hours(request,subject):
-    data=Exam_details.objects.filter(isactive="True",subject_id=subject)
+
+    d1=Subject_details.objects.get(subject=subject)
+    data=Exam_details.objects.filter(isactive="True",subject_id=d1)
     res={}
     for i in data:
+        
         res['exam_id']=i.exam_id
-        # res['subject_id']=i.subject_id
         res['exam_form_beginner']=i.exam_form_beginner
         res['exam_hours_beginner']=i.exam_hours_beginner
         res['exam_form_intermediate']=i.exam_form_intermediate
         res['exam_hours_intermediate']=i.exam_hours_intermediate
         res['exam_form_advanced']=i.exam_form_advanced
         res['exam_hours_advanced']=i.exam_hours_advanced
-    # print(res)
+    print(res)
     return JsonResponse(res)
     
 def student_login(request,enroll,passwd):

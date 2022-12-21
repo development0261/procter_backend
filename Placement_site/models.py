@@ -54,19 +54,19 @@ class Exam_details(models.Model):
     exam_id= models.AutoField(primary_key=True, auto_created=True)
     # student_id=models.ForeignKey(Student_Profile,on_delete=models.CASCADE)
     subject_id=models.ForeignKey(Subject_details,on_delete=models.CASCADE)
-    exam_form_beginner=models.URLField(max_length = 200,null=True,blank=True,)
-    exam_form_intermediate=models.URLField(max_length = 200,null=True,blank=True,)
-    exam_form_advanced=models.URLField(max_length = 200,null=True,blank=True,)
-    # -------------
+    # ------------0---------
+    exam_form_beginner=models.URLField(max_length = 200,null=True,blank=True)
     exam_hours_beginner=models.TimeField(max_length=10,null=True,blank=True,default=datetime.now())
+    exam_form_intermediate=models.URLField(max_length = 200,null=True,blank=True)
     exam_hours_intermediate=models.TimeField(max_length=10,null=True,blank=True,default=datetime.now())
+    exam_form_advanced=models.URLField(max_length = 200,null=True,blank=True,)  
     exam_hours_advanced=models.TimeField(max_length=10,null=True,blank=True,default=datetime.now())
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(blank=True, null=True)
     isactive=models.BooleanField()
     
-    # def __str__(self):
-    #     return f"{self.exam_id}"
+    def __str__(self):
+        return f"{self.exam_id}"
 
     class Meta:
         verbose_name_plural = "Exams Details"
