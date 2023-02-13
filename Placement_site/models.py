@@ -32,6 +32,7 @@ class Student_Profile(AbstractUser):
     #     return f"{self.enrollment_No} - {self.name}"
 
     class Meta:
+        verbose_name = "Student Profile"
         verbose_name_plural = "Student Profile"
  
 class Subject_details(models.Model)  :
@@ -47,6 +48,7 @@ class Subject_details(models.Model)  :
         return f"{self.subject}"
 
     class Meta:
+        verbose_name = "Subject Details"
         verbose_name_plural = "Subject Details"
         
 class Exam_details(models.Model):
@@ -69,6 +71,18 @@ class Exam_details(models.Model):
         return f"{self.exam_id}"
 
     class Meta:
+        verbose_name = "Exam Details"
         verbose_name_plural = "Exams Details"
+        
+class ExamInstructions(models.Model):
+    instruction_id=models.AutoField(primary_key=True, auto_created=True)
+    instruction=models.CharField(max_length=2024, null=False, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField(blank=True, null=True,auto_now_add=True)
+    isactive=models.BooleanField()
+    
+    class Meta:
+        verbose_name = "Exam Instructions"
+        verbose_name_plural = "Exam Instructions"
      
     

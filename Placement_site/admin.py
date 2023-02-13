@@ -53,3 +53,26 @@ class Exam_data(admin.ModelAdmin):
     actions = [make_active,make_inactive]
 admin.site.register(Exam_details,Exam_data)
 
+class Exam_Instruction(admin.ModelAdmin):
+            
+    def make_active(modeladmin, request, queryset):
+        queryset.update(isactive='active')
+    make_active.short_description = "Active Selected Exam Details"
+    
+    def make_inactive(modeladmin, request, queryset):
+        queryset.update(isactive='inactive')
+    make_inactive.short_description = "Inactive Selected Exam Details"
+    
+    list_display=('instruction_id','instruction','created_at','updated_at')
+    list_filter = ['created_at','updated_at']
+    list_per_page = 10
+    list_display_links=("instruction_id","instruction",)
+    ordering=('created_at','updated_at')
+
+    actions = [make_active,make_inactive]
+admin.site.register(ExamInstructions,Exam_Instruction)
+
+admin.site.site_header = "Logix Built Infotech Admin"
+admin.site.site_title = "Logix Built Infotech Admin Portal"
+admin.site.index_title = "Logix Built Infotech Admin Portal"
+

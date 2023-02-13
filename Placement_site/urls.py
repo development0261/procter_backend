@@ -9,4 +9,5 @@ urlpatterns = [
     path("student_login/<str:enroll>/<str:passwd>",views.student_login),
     # path("student_login/",views.student_login),
     path("get_exam_hours/<str:subject>",views.get_exam_hours),
+    path("exam_instruction/",views.exam_instruction),
 ]

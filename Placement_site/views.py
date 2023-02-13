@@ -72,8 +72,18 @@ def student_login(request,enroll,passwd):
                 
     return JsonResponse(res)
 
-# def exam_details(request):
-#     pass 
+def exam_instruction(request):
+    
+    data=ExamInstructions.objects.all().filter(isactive="True")
+    res={}
+    keys=[]
+    values=[]
+    for i in data:
+        keys.append(i.instruction_id)
+        values.append(i.instruction)
+    res=dict(zip(keys,values))
+    print(res)
+    return JsonResponse(res) 
             
     
 
