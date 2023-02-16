@@ -1,8 +1,12 @@
 
 from django.urls import path
 from . import views
+from django.contrib import admin
+
+admin.autodiscover()
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path("student_details/<str:enrollment_no>",views.student_details),
     path("exam_details/<str:subject_id>/<str:student_id>",views.exam_details),
     path("subject_details/",views.subject_details),

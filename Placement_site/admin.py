@@ -4,37 +4,29 @@ from Placement_site.models import *
 from django.contrib.auth.models import Group
 
 admin.site.unregister(Group)
-# Register your models here.
+# # Register your models here.
 
-class Student_Profile_data(admin.ModelAdmin):
-               
-    list_display=('student_id','first_name','last_name','enrollment_No','email','created_at','updated_at')
-    list_filter = ['created_at','updated_at']
-    list_display_links=("student_id","enrollment_No",)
-    list_per_page = 10
-    ordering=('created_at','updated_at')
-admin.site.register(Student_Profile,Student_Profile_data)
 
-class Subject_details_data(admin.ModelAdmin):
+class Interview_Language_data(admin.ModelAdmin):
             
     def make_active(modeladmin, request, queryset):
         queryset.update(isactive='active')
-    make_active.short_description = "Active Selected Subjects"
+    make_active.short_description = "Active Selected Language"
     
     def make_inactive(modeladmin, request, queryset):
         queryset.update(isactive='inactive')
-    make_inactive.short_description = "Inactive Selected Subjects"
+    make_inactive.short_description = "Inactive Selected Language"
     
-    list_display=('subject_id','subject','isactive')
-    list_filter = ['subject','created_at','isactive']
+    list_display=('language','isactive')
+    # list_filter = ['subject','created_at','isactive']
     list_per_page = 10
-    list_display_links=("subject_id","subject",)
+    list_display_links=("language",)
     ordering=('created_at','updated_at','isactive')
 
     actions = [make_active,make_inactive]
-admin.site.register(Subject_details,Subject_details_data)
+admin.site.register(Interview_Language,Interview_Language_data)
 
-class Exam_data(admin.ModelAdmin):
+class Language_Settings_data(admin.ModelAdmin):
             
     def make_active(modeladmin, request, queryset):
         queryset.update(isactive='active')
@@ -44,14 +36,16 @@ class Exam_data(admin.ModelAdmin):
         queryset.update(isactive='inactive')
     make_inactive.short_description = "Inactive Selected Exam Details"
     
-    list_display=('exam_id','subject_id','exam_form_beginner','exam_hours_beginner','exam_form_intermediate','exam_hours_intermediate','exam_form_advanced','exam_hours_advanced','isactive','created_at','updated_at')
-    list_filter = ['subject_id','created_at','updated_at']
+    list_display=('interview_language_id','beginner_level','beginner_level_hours','intermediate_level',
+                  'intermediate_level_hours','advanced_level','advanced_level_hours',
+                  'isactive')
+    # list_filter = ['subject_id','created_at','updated_at']
     list_per_page = 10
-    list_display_links=("exam_id","subject_id",)
+    list_display_links=("interview_language_id",)
     ordering=('created_at','updated_at')
 
     actions = [make_active,make_inactive]
-admin.site.register(Exam_details,Exam_data)
+admin.site.register(Language_Settings,Language_Settings_data)
 
 class Exam_Instruction(admin.ModelAdmin):
             
@@ -63,8 +57,8 @@ class Exam_Instruction(admin.ModelAdmin):
         queryset.update(isactive='inactive')
     make_inactive.short_description = "Inactive Selected Exam Details"
     
-    list_display=('instruction_id','instruction','created_at','updated_at')
-    list_filter = ['created_at','updated_at']
+    list_display=('instruction_id','instruction','isactive')
+    # list_filter = ['isactive','created_at','updated_at']
     list_per_page = 10
     list_display_links=("instruction_id","instruction",)
     ordering=('created_at','updated_at')
@@ -72,7 +66,17 @@ class Exam_Instruction(admin.ModelAdmin):
     actions = [make_active,make_inactive]
 admin.site.register(ExamInstructions,Exam_Instruction)
 
+class User_settings_data(admin.ModelAdmin):
+               
+    list_display=('username','password','email')
+    list_display_links=(["username"])
+    list_per_page = 10
+    ordering=(['username'])
+    
+admin.site.register(User_settings,User_settings_data)
+# ----------------------------------------------------------------
 admin.site.site_header = "Logix Built Infotech Admin"
 admin.site.site_title = "Logix Built Infotech Admin Portal"
-admin.site.index_title = "Logix Built Infotech Admin Portal"
+# admin.site.index_title = "Admin Portal"
+admin.site.site_url=''
 

@@ -82,7 +82,7 @@ def exam_instruction(request):
         keys.append(i.instruction_id)
         values.append(i.instruction)
     res=dict(zip(keys,values))
-    print(res)
+    
     return JsonResponse(res) 
             
     

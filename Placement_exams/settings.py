@@ -27,9 +27,9 @@ SECRET_KEY = 'django-insecure-h9whb$%p$)i$td28%jwq%xlr4+!-oajltrc&qd7fa*l95o!1xc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1']
 
-
+CMS_COLOR_SCHEME = "dark"
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #  'admin_reorder',
     'Placement_site'
+    
 ]
 
 MIDDLEWARE = [
@@ -50,10 +52,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'admin_reorder.middleware.ModelAdminReorder',
 ]
 
-ROOT_URLCONF = 'Placement_exams.urls'
-AUTH_USER_MODEL = 'Placement_site.Student_Profile'
+ROOT_URLCONF = 'Placement_site.urls'
+AUTH_USER_MODEL = 'Placement_site.User_settings'
+# ROOT_URLCONF = 'Interview_exam.urls'
+# AUTH_USER_MODEL = 'Interview_exam.User_settings'
+
 
 TEMPLATES = [
     {
@@ -77,24 +83,24 @@ WSGI_APPLICATION = 'Placement_exams.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 # postgres://hfjcmqtf:kc0KPGBrT2GDzUGP3EDMgkooHRZ3nZB8@topsy.db.elephantsql.com/hfjcmqtf
 
-DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'hfjcmqtf',
-       'USER': 'hfjcmqtf',
-       'PASSWORD': 'kc0KPGBrT2GDzUGP3EDMgkooHRZ3nZB8',
-       'HOST': 'topsy.db.elephantsql.com',
-       'PORT': '5432',
-   }
-}
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'hfjcmqtf',
+#        'USER': 'hfjcmqtf',
+#        'PASSWORD': 'kc0KPGBrT2GDzUGP3EDMgkooHRZ3nZB8',
+#        'HOST': 'topsy.db.elephantsql.com',
+#        'PORT': '5432',
+#    }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -138,3 +144,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ADMIN_REORDER = (
+    
+#     #  {'app': 'Placement_site', 'label': 'Authorisation'},
+#     {'app': 'Placement_site', 'label': 'Interview Exam','models': ('Placement_site.User_settings', 'Placement_site.Interview_Language','Placement_site.Language_Settings','Placement_site.ExamInstructions')},
+# )
