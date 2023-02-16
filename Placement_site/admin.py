@@ -66,12 +66,17 @@ class Exam_Instruction(admin.ModelAdmin):
     actions = [make_active,make_inactive]
 admin.site.register(ExamInstructions,Exam_Instruction)
 
-class User_settings_data(admin.ModelAdmin):
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+class User_settings_data(BaseUserAdmin):
                
     list_display=('username','password','email')
     list_display_links=(["username"])
     list_per_page = 10
     ordering=(['username'])
+
+    fieldsets = (
+        ('User Credentials', {'fields': ('username','email', 'password')}),
+    )
     
 admin.site.register(User_settings,User_settings_data)
 # ----------------------------------------------------------------

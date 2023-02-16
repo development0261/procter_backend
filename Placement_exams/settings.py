@@ -150,3 +150,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     #  {'app': 'Placement_site', 'label': 'Authorisation'},
 #     {'app': 'Placement_site', 'label': 'Interview Exam','models': ('Placement_site.User_settings', 'Placement_site.Interview_Language','Placement_site.Language_Settings','Placement_site.ExamInstructions')},
 # )
+
+ADMIN_ORDERING = [
+    ('Placement_site', [
+        'User_settings',
+        'Interview_Language',
+        'Language_Settings',
+        'ExamInstructions'
+    ]),
+]
